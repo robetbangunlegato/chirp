@@ -49,7 +49,6 @@
                                             </x-dropdown-link>
                                         </form>
                                     </x-slot>
-
                                 </x-dropdown>
                             @endif
                         </div>

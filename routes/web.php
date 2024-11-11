@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,5 +21,10 @@ Route::middleware('auth')->group(function () {
 Route::resource('chirps', ChirpController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+// Auth::routes([
+//     'verify' => true
+//     ]
+// );
 
 require __DIR__.'/auth.php';
