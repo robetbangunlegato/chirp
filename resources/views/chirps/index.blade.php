@@ -2,10 +2,10 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('chirps.store') }}">
             @csrf
-            <textarea name="message" placeholder="{{ __('What\'s on your mind?') }}"
+            <textarea name="message" placeholder="{{ __('Apa yang sekarang kamu pikirkan?') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('message') }}</textarea>
             <x-input-error :messages="$errors->get('message')" class="mt-2" />
-            <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
+            <x-primary-button class="mt-4">{{ __('Cuitkan') }}</x-primary-button>
         </form>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
             @foreach ($chirps as $chirp)
@@ -23,7 +23,10 @@
                                     class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, g:i a') }}</small>
                                 @unless ($chirp->created_at->eq($chirp->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
+                                    <small
+                                        class="ml-2 text-sm text-gray-600">{{ $chirp->updated_at->format('j M Y, g:i a') }}</small>
                                 @endunless
+
                             </div>
                             @if ($chirp->user->is(auth()->user()))
                                 <x-dropdown>
@@ -38,14 +41,14 @@
                                     </x-slot>
                                     <x-slot name="content">
                                         <x-dropdown-link :href="route('chirps.edit', $chirp)">
-                                            {{ __('Edit') }}
+                                            {{ __('Ubah') }}
                                         </x-dropdown-link>
                                         <form method="POST" action="{{ route('chirps.destroy', $chirp) }}">
                                             @csrf
                                             @method('delete')
                                             <x-dropdown-link :href="route('chirps.destroy', $chirp)"
                                                 onclick="event.preventDefault(); this.closest('form').submit();">
-                                                {{ __('Delete') }}
+                                                {{ __('Hapus') }}
                                             </x-dropdown-link>
                                         </form>
                                     </x-slot>
